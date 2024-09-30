@@ -28,11 +28,11 @@
 .card__description {
   margin: 0;
   font-size: 20px;
-  line-height: 1.2;
+  line-height: 24px;
   font-weight: 500;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
+
   max-width: 353px;
 }
 
@@ -52,8 +52,8 @@
   }
   .card__description {
     font-size: 16px;
-    line-height: 1;
     max-width: 235px;
+    overflow: hidden;
   }
 
   .card__like-button {
