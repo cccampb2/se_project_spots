@@ -29,3 +29,6 @@ If you would like to visit the site here is the [Link](https://cccampb2.github.i
 Here is a link to the Figma design used in order to complete the project:
 
 - [Link to the project on Figma](https://www.figma.com/file/BBNm2bC3lj8QQMHlnqRsga/Sprint-3-Project-%E2%80%94-Spots?type=design&node-id=2%3A60&mode=design&t=afgNFybdorZO6cQo-1)
+
+**Link to video**
+https://drive.google.com/file/d/1nvVO0m3g005qNowRlvRnCvrGIGPrdH4v/view?usp=sharing
