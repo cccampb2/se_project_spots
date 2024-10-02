@@ -22,7 +22,7 @@ Below are images from my project, along with explanations of the tools and techn
 
 - The image above demonstrates a text-overflow feature that I recently learned. This ensures that text doesn't extend too far, and if it does, an ellipsis is added to indicate that more text exists but is not currently displayed.
 
-If you would to visit the site here is the [Link](https://cccampb2.github.io/se_project_spots/)
+If you would like to visit the site here is the [Link](https://cccampb2.github.io/se_project_spots/)
 
 **Figma**
 

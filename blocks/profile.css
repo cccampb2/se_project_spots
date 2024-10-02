@@ -22,6 +22,7 @@
   font-weight: 500;
   font-size: 32px;
   line-height: 1;
+  color: #212121;
 }
 
 .profile__description {
@@ -44,7 +45,13 @@
   opacity: 0.7;
   font-size: 16px;
   line-height: 1;
-  border-radius: 90px;
+}
+
+.profile__edit-button::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background-image: url(../images/pencil.svg);
 }
 
 .profile__edit-button:hover {
@@ -52,7 +59,6 @@
 }
 
 .profile__add-button {
-  width: 149px;
   margin-left: auto;
   margin-top: auto;
   background-color: #212121;
@@ -67,6 +73,14 @@
   line-height: 1;
   font-size: 16px;
   white-space: nowrap;
+}
+
+.profile__add-button::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background-image: url(../images/plus.svg);
+  background-size: 100% 100%;
 }
 
 .profile__add-button:hover {
@@ -101,7 +115,6 @@
   .profile__name {
     margin-bottom: 6px;
     font-size: 20px;
-    line-height: 1;
   }
 
   .profile__description {
@@ -110,8 +123,6 @@
 
   .profile__edit-button {
     margin-bottom: 20px;
-    font-size: 16px;
-    line-height: 1;
   }
 
   .profile__add-button {
