@@ -29,11 +29,16 @@ let page = document.querySelector(".page");
 let modal = page.querySelector("#edit-modal");
 let modalExitButton = page.querySelector(".modal__exit-button");
 let profileEditButton = page.querySelector(".profile__edit-button");
+let profileName = page.querySelector(".profile__name").textContent;
+let profileDesc = page.querySelector(".profile__description").textContent;
+let modalName = modal.querySelector("#name");
+let modalDesc = modal.querySelector("#description");
 
-profileEditButton.addEventListener("click", () => {
-  modal.classList.add("modal__open");
-});
+function toggleEditModal() {
+  modalName.value = profileName;
+  modalDesc.value = profileDesc;
+  modal.classList.toggle("modal__open");
+}
 
-modalExitButton.addEventListener("click", () => {
-  modal.classList.remove("modal__open");
-});
+profileEditButton.addEventListener("click", toggleEditModal);
+modalExitButton.addEventListener("click", toggleEditModal);
