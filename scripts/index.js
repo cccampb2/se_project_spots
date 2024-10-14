@@ -33,6 +33,8 @@ let profileName = page.querySelector(".profile__name");
 let profileDesc = page.querySelector(".profile__description");
 const modalName = editModal.querySelector("#name");
 const modalDesc = editModal.querySelector("#description");
+let cardTemplate = page.querySelector("#card__template").content;
+let cardList = page.querySelector(".cards__list");
 
 function toggleEditModal() {
   modalName.value = profileName.textContent;
@@ -41,13 +43,21 @@ function toggleEditModal() {
 }
 
 function handleProfileFormSubmit(evt) {
-  console.log(profileName.textContent);
   profileName.textContent = modalName.value;
   profileDesc.textContent = modalDesc.value;
-  console.log(profileName.textContent);
-
   editModal.classList.toggle("modal__open");
   evt.preventDefault();
+}
+
+function getCardElement(data) {
+  let cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  let cardDesc = cardElement.querySelector(".card__description");
+  let cardImg = cardElement.querySelector(".card__image");
+
+  cardImg.src = data.link;
+  cardImg.alt = data.name;
+  cardDesc.textContent = data.name;
+  return cardElement;
 }
 
 profileEditButton.addEventListener("click", toggleEditModal);
@@ -56,3 +66,7 @@ modalExitButton.addEventListener("click", toggleEditModal);
 const profileFormElement = page.querySelector("#edit-profile");
 
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+
+for (item of intitialCards) {
+  cardList.append(getCardElement(item));
+}
