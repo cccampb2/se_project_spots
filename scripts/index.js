@@ -26,19 +26,33 @@ const intitialCards = [
 ];
 
 let page = document.querySelector(".page");
-let modal = page.querySelector("#edit-modal");
-let modalExitButton = page.querySelector(".modal__exit-button");
-let profileEditButton = page.querySelector(".profile__edit-button");
-let profileName = page.querySelector(".profile__name").textContent;
-let profileDesc = page.querySelector(".profile__description").textContent;
-let modalName = modal.querySelector("#name");
-let modalDesc = modal.querySelector("#description");
+const editModal = page.querySelector("#edit-modal");
+const modalExitButton = page.querySelector(".modal__exit-button");
+const profileEditButton = page.querySelector(".profile__edit-button");
+let profileName = page.querySelector(".profile__name");
+let profileDesc = page.querySelector(".profile__description");
+const modalName = editModal.querySelector("#name");
+const modalDesc = editModal.querySelector("#description");
 
 function toggleEditModal() {
-  modalName.value = profileName;
-  modalDesc.value = profileDesc;
-  modal.classList.toggle("modal__open");
+  modalName.value = profileName.textContent;
+  modalDesc.value = profileDesc.textContent;
+  editModal.classList.toggle("modal__open");
+}
+
+function handleProfileFormSubmit(evt) {
+  console.log(profileName.textContent);
+  profileName.textContent = modalName.value;
+  profileDesc.textContent = modalDesc.value;
+  console.log(profileName.textContent);
+
+  editModal.classList.toggle("modal__open");
+  evt.preventDefault();
 }
 
 profileEditButton.addEventListener("click", toggleEditModal);
 modalExitButton.addEventListener("click", toggleEditModal);
+
+const profileFormElement = page.querySelector("#edit-profile");
+
+profileFormElement.addEventListener("submit", handleProfileFormSubmit);
