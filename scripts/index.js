@@ -25,34 +25,38 @@ const intitialCards = [
   },
 ];
 
-let page = document.querySelector(".page");
+const page = document.querySelector(".page");
 const editModal = page.querySelector("#edit-modal");
 const modalExitButton = page.querySelector(".modal__exit-button");
 const profileEditButton = page.querySelector(".profile__edit-button");
-let profileName = page.querySelector(".profile__name");
-let profileDesc = page.querySelector(".profile__description");
+const profileName = page.querySelector(".profile__name");
+const profileDesc = page.querySelector(".profile__description");
 const modalName = editModal.querySelector("#name");
 const modalDesc = editModal.querySelector("#description");
-let cardTemplate = page.querySelector("#card__template").content;
-let cardList = page.querySelector(".cards__list");
+const cardTemplate = page.querySelector("#card__template").content;
+const cardList = page.querySelector(".cards__list");
 
 function toggleEditModal() {
-  modalName.value = profileName.textContent;
-  modalDesc.value = profileDesc.textContent;
-  editModal.classList.toggle("modal__open");
+  editModal.classList.toggle("modal_open");
 }
 
 function handleProfileFormSubmit(evt) {
   profileName.textContent = modalName.value;
   profileDesc.textContent = modalDesc.value;
-  editModal.classList.toggle("modal__open");
+  toggleEditModal();
   evt.preventDefault();
 }
 
+function openProfileModal() {
+  modalName.value = profileName.textContent;
+  modalDesc.value = profileDesc.textContent;
+  toggleEditModal(); // here to toggle the modal
+}
+
 function getCardElement(data) {
-  let cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  let cardDesc = cardElement.querySelector(".card__description");
-  let cardImg = cardElement.querySelector(".card__image");
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  const cardDesc = cardElement.querySelector(".card__description");
+  const cardImg = cardElement.querySelector(".card__image");
 
   cardImg.src = data.link;
   cardImg.alt = data.name;
@@ -60,10 +64,10 @@ function getCardElement(data) {
   return cardElement;
 }
 
-profileEditButton.addEventListener("click", toggleEditModal);
-modalExitButton.addEventListener("click", toggleEditModal);
+profileEditButton.addEventListener("click", openProfileModal);
+modalExitButton.addEventListener("click", openProfileModal);
 
-const profileFormElement = page.querySelector("#edit-profile");
+const profileFormElement = document.forms["edit-profile-form"];
 
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
