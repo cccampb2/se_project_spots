@@ -71,6 +71,4 @@ const profileFormElement = document.forms["edit-profile-form"];
 
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
-for (item of intitialCards) {
-  cardList.append(getCardElement(item));
-}
+intitialCards.forEach((item) => cardList.append(getCardElement(item)));
