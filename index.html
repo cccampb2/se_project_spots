@@ -50,7 +50,7 @@
     </footer>
     <div id="edit-modal" class="modal">
       <div class="modal__container">
-        <button type="submit" class="modal__exit-button"></button>
+        <button type="submit" class="modal__profile-exit-button"></button>
         <h2 class="modal__title">Edit profile</h2>
         <form id="edit-profile-form" name="edit-profile" class="modal__form">
           <label for="name" class="modal__label">
@@ -69,6 +69,33 @@
               class="modal__input"
               type="text"
               placeholder="Describe yourself"
+            />
+          </label>
+          <button type="submit" class="modal__save-button">Save</button>
+        </form>
+      </div>
+    </div>
+    <div id="new-post-modal" class="modal">
+      <div class="modal__container">
+        <button type="submit" class="modal__post-exit-button"></button>
+        <h2 class="modal__title">New Post</h2>
+        <form id="new-post-form" name="new-post" class="modal__form">
+          <label for="link" class="modal__label">
+            Image Link
+            <input
+              id="link"
+              class="modal__input"
+              type="text"
+              placeholder="Paste a link to the picture"
+            />
+          </label>
+          <label for="caption" class="modal__label">
+            Caption
+            <input
+              id="caption"
+              class="modal__input"
+              type="text"
+              placeholder="Type your caption"
             />
           </label>
           <button type="submit" class="modal__save-button">Save</button>

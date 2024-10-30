@@ -14,7 +14,7 @@
   padding: 0 10px;
 }
 
-.modal_open {
+.modal_is-open {
   visibility: visible;
 }
 
@@ -39,7 +39,8 @@
   border-radius: 8px;
 }
 
-.modal__exit-button {
+.modal__profile-exit-button,
+.modal__post-exit-button {
   position: absolute;
   top: 32px;
   right: 50px;

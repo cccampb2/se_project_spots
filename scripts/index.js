@@ -26,32 +26,72 @@ const intitialCards = [
 ];
 
 const page = document.querySelector(".page");
-const editModal = page.querySelector("#edit-modal");
-const modalExitButton = page.querySelector(".modal__exit-button");
-const profileEditButton = page.querySelector(".profile__edit-button");
-const profileName = page.querySelector(".profile__name");
-const profileDesc = page.querySelector(".profile__description");
-const modalName = editModal.querySelector("#name");
-const modalDesc = editModal.querySelector("#description");
 const cardTemplate = page.querySelector("#card__template").content;
 const cardList = page.querySelector(".cards__list");
 
-function toggleEditModal() {
-  editModal.classList.toggle("modal_open");
+//Edit Profile Modal
+const editModal = page.querySelector("#edit-modal");
+const editProfileExitButton = page.querySelector(".modal__profile-exit-button");
+const profileEditButton = page.querySelector(".profile__edit-button");
+const profileName = page.querySelector(".profile__name");
+const profileDesc = page.querySelector(".profile__description");
+const editModalName = editModal.querySelector("#name");
+const editModalDesc = editModal.querySelector("#description");
+
+//New Post Modal
+const newPostModal = page.querySelector("#new-post-modal");
+const newPostExitButton = page.querySelector(".modal__post-exit-button");
+const newPostButton = page.querySelector(".profile__add-button");
+
+//Edit Profile Modal Functions/Handlers/Listeners
+function toggleModal(modal) {
+  modal.classList.toggle("modal_is-open");
 }
 
 function handleProfileFormSubmit(evt) {
-  profileName.textContent = modalName.value;
-  profileDesc.textContent = modalDesc.value;
-  toggleEditModal();
+  profileName.textContent = editModalName.value;
+  profileDesc.textContent = editModalDesc.value;
+  toggleModal(editModal);
   evt.preventDefault();
 }
 
-function openProfileModal() {
-  modalName.value = profileName.textContent;
-  modalDesc.value = profileDesc.textContent;
-  toggleEditModal(); // here to toggle the modal
+function toggleProfileModal(modal) {
+  editModalName.value = profileName.textContent;
+  editModalDesc.value = profileDesc.textContent;
+  toggleModal(modal);
 }
+
+profileEditButton.addEventListener("click", () => {
+  toggleProfileModal(editModal);
+});
+
+editProfileExitButton.addEventListener("click", () => {
+  toggleProfileModal(editModal);
+});
+
+function handleNewPostFormSubmit(evt) {
+  toggleModal(newPostModal);
+  evt.preventDefault();
+}
+
+const profileFormElement = document.forms["edit-profile-form"];
+
+profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+
+//New Post Modal Functions/Handlers/Listeners
+
+newPostButton.addEventListener("click", () => {
+  toggleProfileModal(newPostModal);
+});
+
+newPostExitButton.addEventListener("click", () => {
+  toggleProfileModal(newPostModal);
+});
+
+const newPostFormElement = document.forms["new-post-form"];
+newPostFormElement.addEventListener("submit", handleNewPostFormSubmit);
+
+//Card Functions/Handlers/Listeners
 
 function getCardElement(data) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
@@ -63,12 +103,5 @@ function getCardElement(data) {
   cardDesc.textContent = data.name;
   return cardElement;
 }
-
-profileEditButton.addEventListener("click", openProfileModal);
-modalExitButton.addEventListener("click", openProfileModal);
-
-const profileFormElement = document.forms["edit-profile-form"];
-
-profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
 intitialCards.forEach((item) => cardList.append(getCardElement(item)));
