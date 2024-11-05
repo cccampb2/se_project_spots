@@ -55,6 +55,18 @@ const previewExitButton = previewModal.querySelector(
   ".modal__preview-exit-button"
 );
 const previewImage = previewModal.querySelector(".modal__preview-image");
+const previewDesc = previewModal.querySelector(".modal__preview-desc");
+
+//Universal function for close buttons
+// Find all close buttons
+const closeButtons = document.querySelectorAll(".modal__close");
+
+closeButtons.forEach((button) => {
+  // Find the closest popup only once
+  const popup = button.closest(".modal");
+  // Set the listener
+  button.addEventListener("click", () => toggleModal(popup));
+});
 
 //Edit Profile Modal Functions/Handlers/Listeners
 function toggleModal(modal) {
@@ -68,18 +80,14 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 }
 
-function toggleProfileModal(modal) {
-  editModalName.value = profileName.textContent;
-  editModalDesc.value = profileDesc.textContent;
-  toggleModal(modal);
+function toggleProfileModal() {
+  editModal.classList.toggle("modal_is-open");
 }
 
 profileEditButton.addEventListener("click", () => {
-  toggleProfileModal(editModal);
-});
-
-editProfileExitButton.addEventListener("click", () => {
-  toggleProfileModal(editModal);
+  editModalName.value = profileName.textContent;
+  editModalDesc.value = profileDesc.textContent;
+  toggleProfileModal();
 });
 
 const profileFormElement = document.forms["edit-profile-form"];
@@ -89,11 +97,7 @@ profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 //New Post Modal Functions/Handlers/Listeners
 
 newPostButton.addEventListener("click", () => {
-  toggleProfileModal(newPostModal);
-});
-
-newPostExitButton.addEventListener("click", () => {
-  toggleProfileModal(newPostModal);
+  toggleModal(newPostModal);
 });
 
 function handleNewPostFormSubmit(evt) {
@@ -102,20 +106,15 @@ function handleNewPostFormSubmit(evt) {
     link: newPostUrl.value,
   });
   cardList.prepend(getCardElement(intitialCards[intitialCards.length - 1]));
-  console.log(intitialCards);
   toggleModal(newPostModal);
+
+  evt.target.reset();
 
   evt.preventDefault();
 }
 
 const newPostFormElement = document.forms["new-post-form"];
 newPostFormElement.addEventListener("submit", handleNewPostFormSubmit);
-
-//Preview Modal Functions/Handlers/Listeners
-
-previewExitButton.addEventListener("click", () => {
-  toggleModal(previewModal);
-});
 
 //Card Functions/Handlers/Listeners
 
@@ -130,6 +129,7 @@ function getCardElement(data) {
 
   cardImg.addEventListener("click", () => {
     previewImage.src = cardImg.src;
+    previewDesc.textContent = cardDesc.textContent;
     toggleModal(previewModal);
   });
 
@@ -146,4 +146,10 @@ function getCardElement(data) {
   return cardElement;
 }
 
-intitialCards.forEach((item) => cardList.append(getCardElement(item)));
+function renderCard(item, method = "prepend") {
+  const cardElement = getCardElement(item);
+  // Add the card into the section using the method
+  cardList[method](cardElement);
+}
+
+intitialCards.forEach((item) => renderCard(item));

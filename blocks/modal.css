@@ -16,6 +16,16 @@
   transition: visibility 0s linear 0.5s, opacity 0.5s linear;
 }
 
+.modal__close {
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 0;
+  border: none;
+}
+
 .modal_is-open {
   visibility: visible;
   opacity: 1;
@@ -49,35 +59,20 @@
   top: 32px;
   right: 50px;
   background-image: url(../images/exit.svg);
-  height: 40px;
-  width: 40px;
-  border: none;
   background-color: #fff;
-  cursor: pointer;
-  padding: 0;
   opacity: 40%;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
-.modal__container_preview {
+.modal__container-preview {
   position: relative;
   display: flex;
 }
 
 .modal__preview-exit-button {
   position: relative;
-  top: 0;
-  right: -12.5;
+  margin-left: 12.5px;
   background-image: url(../images/Close-Icon.svg);
   background-color: transparent;
-  height: 40px;
-  width: 40px;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 .modal__preview-image {
@@ -86,6 +81,19 @@
   background-color: none;
   max-width: 80vw;
   max-height: 80vh;
+}
+
+.modal__preview-desc_frame {
+  background: rgba(33, 33, 33, 1);
+  padding: 4px 8px;
+  border-radius: 8px;
+  width: fit-content;
+}
+
+.modal__preview-desc {
+  color: rgba(255, 255, 255, 1);
+  font-weight: 500;
+  margin: 0;
 }
 
 .modal__form {
@@ -120,6 +128,10 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 1;
+}
+
+.modal__input:hover {
+  border: solid 1px rgba(33, 33, 33, 1);
 }
 
 .modal__save-button {
@@ -161,5 +173,22 @@
 
   .modal__input {
     margin: 8px 0 24px 0;
+  }
+
+  .modal__container_preview {
+    flex-direction: column-reverse;
+  }
+
+  .modal__preview-exit-button {
+    margin-left: auto;
+    margin-bottom: 8px;
+  }
+
+  .modal__preview-image {
+    max-width: 288px;
+    margin: 0 16px 0;
+  }
+  .modal__preview-desc_frame {
+    margin-left: 16px;
   }
 }

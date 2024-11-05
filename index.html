@@ -51,7 +51,10 @@
     </footer>
     <div id="edit-modal" class="modal">
       <div class="modal__container">
-        <button type="submit" class="modal__profile-exit-button"></button>
+        <button
+          type="button"
+          class="modal__profile-exit-button modal__close"
+        ></button>
         <h2 class="modal__title">Edit profile</h2>
         <form id="edit-profile-form" name="edit-profile" class="modal__form">
           <label for="name" class="modal__label">
@@ -78,7 +81,10 @@
     </div>
     <div id="new-post-modal" class="modal">
       <div class="modal__container">
-        <button type="submit" class="modal__post-exit-button"></button>
+        <button
+          type="button"
+          class="modal__post-exit-button modal__close"
+        ></button>
         <h2 class="modal__title">New Post</h2>
         <form id="new-post-form" name="new-post" class="modal__form">
           <label for="link" class="modal__label">
@@ -104,9 +110,18 @@
       </div>
     </div>
     <div id="preview-modal" class="modal">
-      <div class="modal__container_preview">
-        <img class="modal__preview-image" src="" alt="" />
-        <button type="submit" class="modal__preview-exit-button"></button>
+      <div class="modal__container-preview">
+        <div class="preview_image-container">
+          <img class="modal__preview-image" src="" alt="" />
+          <div class="modal__preview-desc_frame">
+            <h2 class="modal__preview-desc"></h2>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="modal__preview-exit-button modal__close"
+        ></button>
       </div>
     </div>
     <script defer src="./scripts/index.js"></script>
