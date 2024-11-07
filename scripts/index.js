@@ -81,7 +81,7 @@ function handleProfileFormSubmit(evt) {
 }
 
 function toggleProfileModal() {
-  editModal.classList.toggle("modal_is-open");
+  toggleModal(editModal);
 }
 
 profileEditButton.addEventListener("click", () => {
@@ -105,7 +105,7 @@ function handleNewPostFormSubmit(evt) {
     name: newPostCaption.value,
     link: newPostUrl.value,
   });
-  cardList.prepend(getCardElement(intitialCards[intitialCards.length - 1]));
+  renderCard(intitialCards[intitialCards.length - 1]);
   toggleModal(newPostModal);
 
   evt.target.reset();
@@ -130,6 +130,8 @@ function getCardElement(data) {
   cardImg.addEventListener("click", () => {
     previewImage.src = cardImg.src;
     previewDesc.textContent = cardDesc.textContent;
+    previewImage.alt = cardDesc.textContent;
+
     toggleModal(previewModal);
   });
 
