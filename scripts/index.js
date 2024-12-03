@@ -35,6 +35,7 @@ const cardList = page.querySelector(".cards__list");
 
 //Edit Profile Modal
 const editModal = page.querySelector("#edit-modal");
+const editForm = page.querySelector("#edit-profile-form");
 const editProfileExitButton = page.querySelector(".modal__profile-exit-button");
 const profileEditButton = page.querySelector(".profile__edit-button");
 const profileName = page.querySelector(".profile__name");
@@ -48,6 +49,7 @@ const newPostExitButton = page.querySelector(".modal__post-exit-button");
 const newPostButton = page.querySelector(".profile__add-button");
 const newPostUrl = page.querySelector("#link");
 const newPostCaption = page.querySelector("#caption");
+const buttonElement = page.querySelector("#new-post-btn");
 
 //Preview Modal
 const previewModal = page.querySelector("#preview-modal");
@@ -76,6 +78,7 @@ function toggleModal(modal) {
 function handleProfileFormSubmit(evt) {
   profileName.textContent = editModalName.value;
   profileDesc.textContent = editModalDesc.value;
+
   toggleModal(editModal);
   evt.preventDefault();
 }
@@ -87,6 +90,7 @@ function toggleProfileModal() {
 profileEditButton.addEventListener("click", () => {
   editModalName.value = profileName.textContent;
   editModalDesc.value = profileDesc.textContent;
+  resetValidation(editForm, [editModalName, editModalDesc], settings);
   toggleProfileModal();
 });
 
@@ -107,6 +111,7 @@ function handleNewPostFormSubmit(evt) {
   });
   renderCard(intitialCards[intitialCards.length - 1]);
   toggleModal(newPostModal);
+  disableButton(buttonElement, settings);
 
   evt.target.reset();
 
