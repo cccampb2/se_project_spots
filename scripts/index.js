@@ -73,7 +73,19 @@ closeButtons.forEach((button) => {
 //Edit Profile Modal Functions/Handlers/Listeners
 function toggleModal(modal) {
   modal.classList.toggle("modal_is-open");
+
+  if (modal.classList.contains("modal_is-open")) {
+    document.addEventListener("keyup", closeWithEscape);
+  }
 }
+
+const closeWithEscape = (evt) => {
+  const currModal = page.querySelector(".modal_is-open");
+  if (evt.key === "Escape") {
+    toggleModal(currModal);
+    document.removeEventListener("keyup", closeWithEscape);
+  }
+};
 
 function handleProfileFormSubmit(evt) {
   profileName.textContent = editModalName.value;
@@ -158,5 +170,16 @@ function renderCard(item, method = "prepend") {
   // Add the card into the section using the method
   cardList[method](cardElement);
 }
+
+//Modal Listeners/functions
+
+const modals = Array.from(page.querySelectorAll(".modal"));
+modals.forEach((modal) => {
+  modal.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("modal")) {
+      toggleModal(evt.target);
+    }
+  });
+});
 
 intitialCards.forEach((item) => renderCard(item));
