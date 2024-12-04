@@ -35,7 +35,6 @@ const cardList = page.querySelector(".cards__list");
 
 //Edit Profile Modal
 const editModal = page.querySelector("#edit-modal");
-const editForm = page.querySelector("#edit-profile-form");
 const editProfileExitButton = page.querySelector(".modal__profile-exit-button");
 const profileEditButton = page.querySelector(".profile__edit-button");
 const profileName = page.querySelector(".profile__name");
@@ -76,22 +75,22 @@ function toggleModal(modal) {
 
   if (modal.classList.contains("modal_is-open")) {
     document.addEventListener("keyup", closeWithEscape);
+  } else {
+    document.removeEventListener("keyup", closeWithEscape);
   }
 }
 
 const closeWithEscape = (evt) => {
-  const currModal = page.querySelector(".modal_is-open");
   if (evt.key === "Escape") {
+    const currModal = page.querySelector(".modal_is-open");
     toggleModal(currModal);
-    document.removeEventListener("keyup", closeWithEscape);
   }
 };
 
 function handleProfileFormSubmit(evt) {
   profileName.textContent = editModalName.value;
   profileDesc.textContent = editModalDesc.value;
-
-  toggleModal(editModal);
+  toggleProfileModal();
   evt.preventDefault();
 }
 
@@ -102,7 +101,7 @@ function toggleProfileModal() {
 profileEditButton.addEventListener("click", () => {
   editModalName.value = profileName.textContent;
   editModalDesc.value = profileDesc.textContent;
-  resetValidation(editForm, [editModalName, editModalDesc], settings);
+  resetValidation(profileFormElement, [editModalName, editModalDesc], settings);
   toggleProfileModal();
 });
 
