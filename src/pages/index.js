@@ -1,3 +1,20 @@
+import "./index.css";
+import {
+  settings,
+  enableValidation,
+  disableButton,
+  toggleButtonState,
+  resetValidation,
+} from "../scripts/validation.js";
+
+import logo from "../images/Logo.svg";
+import avatar from "../images/avatar.jpg";
+
+const logoImage = document.getElementById("image-logo");
+const avatarImage = document.getElementById("image-avatar");
+avatarImage.src = avatar;
+logoImage.src = logo;
+
 const intitialCards = [
   {
     name: "Golden Gate Bridge",
@@ -182,3 +199,4 @@ modals.forEach((modal) => {
 });
 
 intitialCards.forEach((item) => renderCard(item));
+enableValidation(settings);
