@@ -7,7 +7,7 @@ import {
   resetValidation,
 } from "../scripts/validation.js";
 
-import { setButtonText } from "../utils/helpers.js";
+import { setButtonText, handleSubmit } from "../utils/helpers.js";
 
 import Api from "../utils/Api.js";
 
@@ -102,35 +102,28 @@ const closeWithEscape = (evt) => {
 };
 
 function handleProfileFormSubmit(evt) {
-  setButtonText(profileSaveBtn, true);
-  myApi
-    .editUserInfo({ name: editModalName.value, about: editModalDesc.value })
-    .then((data) => {
-      profileName.textContent = data.name;
-      profileDesc.textContent = data.about;
-      toggleProfileModal();
-      evt.preventDefault();
-    })
-    .catch(console.error)
-    .finally(() => {
-      setButtonText(profileSaveBtn, false);
-    });
+  function makeRequest() {
+    return myApi
+      .editUserInfo({ name: editModalName.value, about: editModalDesc.value })
+      .then((data) => {
+        profileName.textContent = data.name;
+        profileDesc.textContent = data.about;
+        toggleProfileModal();
+        evt.preventDefault();
+      });
+  }
+
+  handleSubmit(makeRequest, evt);
 }
 
 function handleAvatarSubmit(evt) {
-  setButtonText(avatarSaveBtn, true);
-  myApi
-    .editAvatarInfo({ avatar: avatarInput.value })
-    .then((data) => {
+  function makeRequest() {
+    return myApi.editAvatarInfo({ avatar: avatarInput.value }).then((data) => {
       avatarImage.src = data.avatar;
       toggleModal(avatarModal);
-    })
-    .catch(console.error)
-    .finally(() => {
-      setButtonText(avatarSaveBtn, false);
     });
-
-  evt.preventDefault();
+  }
+  handleSubmit(makeRequest, evt);
 }
 
 function toggleProfileModal() {
@@ -155,26 +148,32 @@ newPostButton.addEventListener("click", () => {
 });
 
 function handleNewPostFormSubmit(evt) {
-  setButtonText(newPostSaveBtn, true);
+  function makeRequest() {
+    return myApi
+      .addNewCard({
+        name: newPostCaption.value,
+        link: newPostUrl.value,
+      })
+      .then((card) => {
+        renderCard(card);
+        toggleModal(newPostModal);
+        disableButton(buttonElement, settings);
+        evt.target.reset();
+      });
+  }
 
-  myApi
-    .addNewCard({
-      name: newPostCaption.value,
-      link: newPostUrl.value,
-    })
-    .then((card) => {
-      renderCard(card);
-    })
-    .catch(console.error)
-    .finally(() => {
-      setButtonText(newPostSaveBtn, false);
+  handleSubmit(makeRequest, evt);
+}
+
+function handleDeleteSubmit(evt) {
+  function makeRequest() {
+    return myApi.deleteCard({ id: selectedCardId }).then(() => {
+      selectedCard.remove();
+      toggleModal(deleteModal);
     });
-  toggleModal(newPostModal);
-  disableButton(buttonElement, settings);
+  }
 
-  evt.target.reset();
-
-  evt.preventDefault();
+  handleSubmit(makeRequest, evt, "Deleting...");
 }
 
 const newPostFormElement = document.forms["new-post-form"];
@@ -229,20 +228,6 @@ function handleCardDelete(cardElement, data) {
   selectedCard = cardElement;
   selectedCardId = data._id;
   toggleModal(deleteModal);
-}
-
-function handleDeleteSubmit() {
-  setButtonText(deleteBtn, true, "Delete", "Deleting...");
-  myApi
-    .deleteCard({ id: selectedCardId })
-    .then(() => {
-      selectedCard.remove();
-      toggleModal(deleteModal);
-    })
-    .catch(console.error)
-    .finally(() => {
-      setButtonText(deleteBtn, false, "Delete", "Deleting...");
-    });
 }
 
 cancelBtn.addEventListener("click", () => {
