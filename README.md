@@ -32,3 +32,7 @@ Here is a link to the Figma design used in order to complete the project:
 
 **Link to video**
 https://drive.google.com/file/d/1nvVO0m3g005qNowRlvRnCvrGIGPrdH4v/view?usp=sharing
+
+
+[Project Demo - Spots by Caleb Campbell (2024)](https://www.loom.com/share/58553062ebed47d0b05983b4df7f784e?sid=bac28fe5-eca8-45ef-a0bb-c941da627b6d)
+
